@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>JavaScriptCore test</title>
+    <script type="text/javascript" src = "jquery-3.1.1.slim.js"></script>
+    <style type="text/css">
+    *{
+    	margin: 0;
+    	padding: 0;
+    }
+    html{font:normal calc(100vw/7.5)/1.5 "微软雅黑",Verdana,"Microsoft YaHei";
+    font-size: calc(100vw/7.5);font-family:"Microsoft YaHei";width: 100%;overflow-x: hidden;overflow-y: scroll;position: relative;}
+    li{
+    	list-style: none;
+    }
+    .container{
+    	position: relative;
+    	display: block;
+    	width: 100%;
+    }
+    h4{
+    	position: relative;
+    	margin: 0.2rem;
+    	color: black;
+    	font-size: 0.35rem;
+    	text-align: center;
+    }
+    ul li{
+    	position: relative;
+    	display: block;
+    	overflow: hidden;
+    }
+    p{
+    	position: relative;
+    	color: #333333;
+    	text-align: left;
+    	margin: 0.2rem;
+    	font-size: 0.3rem;
+    }
+    button{
+    	position: relative;
+    	display: block;
+    	color: #333333;
+    	background-color: #2fbe42;
+    	width: 90%;
+    	margin: 0rem auto;
+    	text-align: center;
+    	font-size: 0.3rem;
+    	border-style: none;
+    	height: 0.80rem;
+    }
+    .special{
+    	color: #db4f47;
+    }
+    </style>
+</head>
+<body>
+    <div class = "container">
+    	<h4>JavaScriptCore Test</h4>
+    	<ul>
+    		<li>
+    			<p>js调用oc方法，显示弹窗</p>
+    			<button id = "target_first" value = "">js调用oc方法</button>
+    		</li>
+    		<li>
+    			<p>js调用oc方法后回调，显示回调弹窗</p>
+    			<button id = "target_second" value = "">js调用oc方法并回调</button>
+    		</li>
+    		<li>
+    			<p>原生按钮调用js，显示输出弹窗</p>
+    			<p class = "special">点击左边tabbarItem</p>
+    		</li>
+    		<li>
+    			<p>原生按钮调用js后回调，显示输出弹窗</p>
+    			<p class = "special">点击右边边tabbarItem</p>
+    		</li>
+    	</ul>
+    </div>
+</body>
+<script type="text/javascript">
+    var callBack = function(a){
+        alert("你选择的结果是："+a);
+    }
+var ocAllocatejs = function(){
+    alert("ocAllocatejs方法执行了");
+}
+var ocAllocatejsWithCallBack = function(){
+    WebViewJavascriptBridge.ocAllocatejsCallBack('oc调用js的回调参数');
+}
+	$(function () {
+        $("#target_first").on("touchstart",function(){
+                WebViewJavascriptBridge.wxPay('TN20160526');
+        });
+		$("#target_second").on("touchstart",function(){
+			WebViewJavascriptBridge.callBack('请选择是或否');
+		});
+    
+	});
+</script>
+</html>
